@@ -56,3 +56,30 @@ for(const s of uni2){
 }
 }
 render2();
+
+
+const list3 = document.getElementById("albums-list");
+async function loadAlbums() {
+    try{
+    const response = await fetch(`https://jsonplaceholder.typicode.com/albums`)
+    const data = await response.json();
+    console.log("Got " + data.length);
+    return data;
+    } catch (error) {
+        console.log("Error: " , error);
+        return [];
+    }
+    
+}
+
+async function render3() {
+    
+const uni3 = await loadComments();
+for(const s of uni3){
+    const li= document.createElement("li");
+    li.textContent = `${s.id} - ${s.title}`;
+
+    list3.appendChild(li);
+}
+}
+render3();
