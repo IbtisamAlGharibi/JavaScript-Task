@@ -207,3 +207,27 @@ async function renderAlbumById() {
 }
 
 renderAlbumById();
+
+
+
+const photoList = document.getElementById("photo-id-list");
+async function loadPhotoById() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/photos/1");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderPhotoById() {
+    const post = await loadPhotoById();
+
+    const li = document.createElement("li");
+    li.textContent = `${post.id} - ${post.title}`;
+
+    photoList.appendChild(li);
+}
+
+renderPhotoById();
