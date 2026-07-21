@@ -74,7 +74,7 @@ async function loadAlbums() {
 
 async function render3() {
     
-const uni3 = await loadComments();
+const uni3 = await loadAlbums();
 for(const s of uni3){
     const li= document.createElement("li");
     li.textContent = `${s.id} - ${s.title}`;
@@ -83,3 +83,30 @@ for(const s of uni3){
 }
 }
 render3();
+
+
+const list4 = document.getElementById("todos-list");
+async function loadTodos() {
+    try{
+    const response = await fetch(`https://jsonplaceholder.typicode.com/todos`)
+    const data = await response.json();
+    console.log("Got " + data.length);
+    return data;
+    } catch (error) {
+        console.log("Error: " , error);
+        return [];
+    }
+    
+}
+
+
+async function render4() {   
+const uni4 = await loadTodos();
+for(const s of uni4){
+    const li= document.createElement("li");
+    li.textContent = `${s.id} - ${s.title}`;
+
+    list4.appendChild(li);
+}
+}
+render4();
