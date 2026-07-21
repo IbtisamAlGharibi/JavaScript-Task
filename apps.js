@@ -28,3 +28,31 @@ for(const s of uni){
 }
 }
 render();
+
+
+const list2 = document.getElementById("comments-list");
+async function loadComments() {
+    try{
+    const response = await fetch(`https://jsonplaceholder.typicode.com/comments`)
+    const data = await response.json();
+    console.log("Got " + data.length);
+    return data;
+    } catch (error) {
+        console.log("Error: " , error);
+        return [];
+    }
+    
+}
+
+async function render2() {
+    
+const uni2 = await loadComments();
+
+for(const s of uni2){
+    const li= document.createElement("li");
+    li.textContent = `${s.id} - ${s.email}`;
+
+    list2.appendChild(li);
+}
+}
+render2();
