@@ -110,3 +110,31 @@ for(const s of uni4){
 }
 }
 render4();
+
+
+
+const list5 = document.getElementById("users-list");
+async function loadUsers() {
+    try{
+    const response = await fetch(`https://jsonplaceholder.typicode.com/users`)
+    const data = await response.json();
+    console.log("Got " + data.length);
+    return data;
+    } catch (error) {
+        console.log("Error: " , error);
+        return [];
+    }
+    
+}
+
+
+async function render5() {   
+const uni5 = await loadUsers();
+for(const s of uni5){
+    const li= document.createElement("li");
+    li.textContent = `${s.name} - ${s.username} - ${s.email}`;
+
+    list5.appendChild(li);
+}
+}
+render5();
