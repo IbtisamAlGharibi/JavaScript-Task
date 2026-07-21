@@ -254,3 +254,26 @@ async function renderTodoById() {
 }
 
 renderTodoById();
+
+
+const userList = document.getElementById("user-id-list");
+async function loadUserById() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users/1");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderUserById() {
+    const post = await loadUserById();
+
+    const li = document.createElement("li");
+    li.textContent = `${post.id} - ${post.name} - ${post.username}`;
+
+    userList.appendChild(li);
+}
+
+renderUserById();
