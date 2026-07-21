@@ -161,3 +161,26 @@ async function renderPostById() {
 }
 
 renderPostById();
+
+
+const commentList = document.getElementById("comment-id-list");
+async function loadCommentById() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/comments/1");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderCommentById() {
+    const post = await loadCommentById();
+
+    const li = document.createElement("li");
+    li.textContent = `${post.id} - ${post.name} - ${post.email}`;
+
+    commentList.appendChild(li);
+}
+
+renderCommentById();
