@@ -184,3 +184,26 @@ async function renderCommentById() {
 }
 
 renderCommentById();
+
+
+const albumList = document.getElementById("album-id-list");
+async function loadAlbumById() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/albums/1");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderAlbumById() {
+    const post = await loadAlbumById();
+
+    const li = document.createElement("li");
+    li.textContent = `${post.id} - ${post.title}`;
+
+    albumList.appendChild(li);
+}
+
+renderAlbumById();
