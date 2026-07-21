@@ -138,3 +138,26 @@ for(const s of uni5){
 }
 }
 render5();
+
+
+const postList = document.getElementById("post-id-list");
+async function loadPostById() {
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function renderPostById() {
+    const post = await loadPostById();
+
+    const li = document.createElement("li");
+    li.textContent = `${post.id} - ${post.title}`;
+
+    postList.appendChild(li);
+}
+
+renderPostById();
